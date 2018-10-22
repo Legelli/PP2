@@ -1,0 +1,144 @@
+%==================================================
+%      PREAMBOLO e DICHIARAZIONI INIZIALI
+%==================================================
+\documentclass[10pt,oneside,a4paper]{article}
+
+\usepackage[latin1]{inputenc} 
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{siunitx} %Inserisce automaticamente i dati con le unità  di misura correttamente formattate del SI (utilizzo: \SI{0.82}{m^2}, in generale \SI{misura con il punto decimale}{unità  di misura})
+\sisetup{output-decimal-marker = {.}, separate-uncertainty = true, input-uncertainty-signs = \pm, detect-weight=true, detect-family=true} %per usare SI con il punto decimale
+\usepackage{listings} %Per citare codice informatico formattandolo correttamente
+\usepackage{amsmath,amsthm,verbatim,amssymb,amsfonts,amscd, graphicx,mathtools}
+\usepackage[makeroom]{cancel}
+\newcommand{\abs}[1]{\left\lvert\,#1\,\right\rvert}
+\usepackage{geometry}
+\usepackage{epigraph}
+\usepackage{booktabs}	%tabelle migliorate
+\usepackage{tablefootnote}	%note a piè di pagina in tabella
+\usepackage{threeparttable} %tabella con note a piè di tabella
+\usepackage{caption}	%descrizione per figure
+\usepackage{dblfnote}
+\captionsetup{tableposition=top,figureposition=bottom,font=small} %setup descrizione
+\usepackage{float}
+\usepackage{esvect} %vettori
+\usepackage{longtable} %tabelle lunghe
+\usepackage[dvipsnames]{xcolor}
+\definecolor{sepia}{HTML}{80002A}
+\usepackage[colorlinks=true, citecolor=black, linkcolor=sepia, urlcolor=black]{hyperref}
+\usepackage{mathrsfs}
+\usepackage{circuitikz}
+
+
+\usepackage{multicol}
+\newenvironment{Figure}
+  {\par\medskip\noindent\minipage{\linewidth}}
+  {\endminipage\par\medskip}
+
+\newcommand{\var}{\operatorname{var}}
+\newcommand{\cov}{\operatorname{cov}}
+
+
+\usepackage{listings} %Per inserire codice
+\lstnewenvironment{codice_c}[1][]
+{\lstset{basicstyle=\small\ttfamily, columns=fullflexible,
+keywordstyle=\color{red}\bfseries, commentstyle=\color{blue},
+language=C, basicstyle=\small,
+numbers=left, numberstyle=\tiny,
+stepnumber=2, numbersep=5pt, frame=shadowbox,  showstringspaces=false, #1}}{}
+
+%==================================================
+%                  PRIMA PAGINA
+%==================================================
+
+\title{\textsc{\textbf{Esercitazione 2}: Amplificatore ad emettitore comune}}
+\author{\small{G. Galbato Muscio} \and \small{L. Gravina} \and \small{L. Graziotto}}
+\date{\today}
+
+\begin{document}
+	\begin{figure}
+		\centering
+		\includegraphics[scale=0.5, trim={2.8cm 8.9cm 0 9cm}, clip]{logo.png}
+	\end{figure}
+	\maketitle
+	\begin{center} 
+		\fbox{{\fontsize{12pt}{8mm}\textsc{Gruppo 11}}} \\
+	\end{center}
+\hrule
+\vspace{0.5cm}
+\renewcommand{\abstractname}{Abstract}
+\begin{abstract}
+Si utilizza un transistor 2N2222A di tipo \emph{npn} per realizzare un amplificatore ad emettitore comune, con amplificazione di tensione di circa $A_v = -50$. Se ne studia quindi la risposta in frequenza e le resistenze in uscita e in ingresso.
+\end{abstract}
+\vspace{4cm}
+\tableofcontents %Indice
+\newpage
+
+
+\pagebreak
+\begin{multicols}{2}
+%==================================================
+%      		PROGETTO RETE AUTOPOLARIZZANTE
+%==================================================
+\section{Progetto della rete autopolarizzante}
+Si realizza il circuito seguente per l'amplificatore, utilizzando un transistor 2N2222A di tipo \emph{npn}.
+
+\begin{flushleft}
+\hspace*{-1cm}
+\begin{circuitikz} [scale=.9]
+	\draw (0,0) node[ground]{}
+	(0,0) to[sV, l=$v_{\text{s}}$] (0,2) to[R=$R_s$] (1.5,2) to[C=$C_1$] (3.5,2)
+	(3.5,-0.5) to[R=$R_2$] (3.5,2)
+	(3.5,2) to[R=$R_1$] (3.5,4.5)
+	(5,2) node[npn] (npn) {}
+	(3.5,2) -- (npn.B);
+	\draw (5,-0.5) to[R=$R_E$] (npn.E);
+	\draw (npn.C) to[R=$R_C$] (5,4.5);
+	\draw (npn.C) to[C=$C_2$] ++(1.5,0) to[short, -*] ++(0.25,0) node[right] {$v_o$};
+	\draw (npn.E) -- ++(1,0) to[C=$C_E$] (6,-0.5)
+	(6,-0.5) -- (5,-0.5)
+	(3.5,4.5) -- (5,4.5)
+	(3.5,-0.5) -- (5,-0.5)
+	(4.25,4.5) to[short, *-] (4.25,4.75) node[above] {$V_\text{CC}$}
+	(4.25,-0.5) node[ground]{}
+	;\end{circuitikz}
+\end{flushleft}
+
+I valori degli elementi utilizzati sono, come da misura con il multimetro e con il ponte:
+\begin{equation*}
+\begin{aligned}
+R_1 &= \SI{111 \pm 111}{\ohm} \\
+R_2 &= \SI{111 \pm 111}{\ohm} \\
+R_C &= \SI{111 \pm 111}{\ohm} \\
+R_E &= \SI{111 \pm 111}{\ohm} \\
+V_\text{CC} &= \SI{111 \pm 111}{V} \\
+C_1 &= \SI{111 \pm 111}{F} \\
+C_2 &= \SI{111 \pm 111}{F} \\
+C_E &= \SI{111 \pm 111}{F}.
+\end{aligned}
+\end{equation*}
+Si verifica con il multimetro che le tensioni tra i diversi nodi del circuito siano compatibili con quelle previste dalla teoria, al fine di verificare il corretto funzionamento del circuito stesso. Si riporta in tabella~\ref{tab:verifica} il confronto tra valore previsto e misurato.
+
+\begin{center}
+\captionof{table}{Valori previsti e misurati per il circuito}
+\label{tab:verifica}
+\begin{tabular}{l|c|c}
+ & Valore previsto & Valore misurato \\
+\hline
+$V_C$ & \SI{111}{V} & \SI{111 \pm 111}{V}\\
+$V_B$ & \SI{111}{V} & \SI{111 \pm 111}{V}\\
+$V_E$ & \SI{111}{V} & \SI{111 \pm 111}{V}\\
+$V_\text{CE}$ & \SI{111}{V} & \SI{111 \pm 111}{V}\\
+$V_\text{BE}$ & \SI{111}{V} & \SI{111 \pm 111}{V}\\
+$I_C$ & \SI{111}{mA} & \SI{111 \pm 111}{mA}\\
+$I_E$ & \SI{111}{mA} & \SI{111 \pm 111}{mA}\\
+\hline
+\end{tabular}
+\end{center}
+
+Si ha 
+
+
+
+\end{multicols}
+\end{document}
