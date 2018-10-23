@@ -121,7 +121,7 @@ C_E &= \SI{89.62 \pm 0.05}{\micro F}.
 \end{equation*}
 Si verifica con il multimetro che le tensioni tra i diversi nodi del circuito siano compatibili con quelle previste, dati gli elementi usati, al fine di verificare il corretto funzionamento del circuito stesso. 
 
-Si ha, nell'ipotesi che il circuito si trovi nella regione attiva\footnote{Dunque si ha $V_\text{BE} = 0.7$ e $I_B$ trascurabile; si verificherà la correttezza di queste ipotesi}:
+Si ha, nell'ipotesi che il circuito si trovi nella regione attiva\footnote{Dunque si ha $V_\text{BE} = 0.7$ e $I_B$ trascurabile; si verificherà la correttezza di queste ipotesi nel seguito.}:
 \begin{equation*}
 \begin{aligned}
 V_\text{BB} &= \frac{R_2}{R_1+R_2}V_\text{CC} \\
@@ -182,8 +182,6 @@ Si connette al circuito il generatore di segnali e si imposta un segnale sinusoi
 Variando $v_s$, si misura con l'oscilloscopio l'ampiezza picco-picco di $v_i$ e di $v_o$, e si stima l'amplificazione $A_v = -v_o / v_i$. Si riportano in tabella~\ref{tab:dinamica} i valori misurati.
 
 \begin{center}
-\captionof{table}{Misure di ampiezza picco-picco di $v_i$ e $v_o$}
-\label{tab:dinamica}
 \begin{tabular}{c|c|c}
 $v_i$ [\SI{}{mV}] ($\pm 3\%$) & $v_o$ ($\pm 3\%$) [\SI{}{V}] & $A_v$ \\
 \hline
@@ -198,12 +196,15 @@ $v_i$ [\SI{}{mV}] ($\pm 3\%$) & $v_o$ ($\pm 3\%$) [\SI{}{V}] & $A_v$ \\
         84.00 &        3.68 &   43.81 \\
 \hline
 \end{tabular}
+\captionof{table}{Misure di ampiezza picco-picco di $v_i$ e $v_o$}
+\label{tab:dinamica}
 \end{center}
 
 Si ha un'amplificazione media di
 \[
-A_v = 45.8 \pm 1.2.
+A_v = 45.8 \pm 1.2,
 \]
+coerente con quanto previsto precedentemente.
 Si osserva che per ampiezze superiori a $v_i \simeq \SI{90}{mV}$, il segnale appare distorto: questo è dovuto alla limitata dinamica del transistor. Si riporta in figura~\ref{fig:distorsione} uno screenshot dell'oscilloscopio per evidenziare il fenomeno.
 
 \begin{figure}[H]
@@ -281,7 +282,7 @@ R_\text{in} = \frac{v_2}{v_i - v_2}r_x.
 \]
 Si lavora ancora in regime sinusoidale a frequenza \SI{10.7 \pm 0.3}{kHz}.
 
-Si riporta in tabella~\ref{tab:resistIngresso} i valori di $r_x$ e dei potenziali, nonché le stime di $R_\text{in}$.
+Si riportano in tabella~\ref{tab:resistIngresso} i valori di $r_x$ e dei potenziali, nonché le stime di $R_\text{in}$.
 
 La stima della resistenza, data dal valore medio, è
 \[
