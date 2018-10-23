@@ -164,14 +164,14 @@ Al fine di stabilizzare il punto di lavoro, si introducono i condensatori $C_1$,
 \frac{1}{\omega C_E} \ll R_E
 \]  
 anche per pulsazioni molto basse, dell'ordine di $10/(R_E C_E) \sim \SI{93.9}{s^{-1}}$, ossia fino a circa \SI{15}{Hz}.
-Utilizzando i condensatori $C_1$ e $C_2$, scelti con capacità molto grandi al fine di aumentare il più possibile la banda passante dell'amplificatore, si introdurranno comunque delle frequenze di taglio
+Per quanto riguarda i condensatori $C_1$ e $C_2$, si sono scelte capacità non eccessivamente grandi (dell'ordine delle decine e centinaia di \SI{}{nF}) al fine di osservare gli andamenti diversi del circuito prima e dopo le frequenze di taglio
 \begin{equation}\label{eq:freqTaglio}
 \begin{aligned}
 f' &= \frac{1}{2\pi C_1 R_\text{in}} \\
 f'' &= \frac{1}{2\pi C_2 (R_\text{out} + R_L)},
 \end{aligned}
 \end{equation}
-dove $R_\text{in} = R_B || h_\text{ie} \simeq R_B$\footnote{Dal datasheet del transistor si ha $h_\text{ie} = 2 \div 8$ \SI{}{k\ohm}.} e $R_\text{out} = R_C || h_\text{oe}^{-1} \simeq R_C$\footnote{Sempre dal datasheet del transistor, si ha infatti $h_\text{oe} = 5\div35$ \SI{}{\micro \ohm^{-1}}.}, mentre $R_L$ sarà la resistenza di carico introdotta nel seguito.
+dove $R_\text{in} = R_B || h_\text{ie} \simeq R_B$\footnote{Dal datasheet del transistor si ha $h_\text{ie} = 2 \div 8$ \SI{}{k\ohm}.} e $R_\text{out} = R_C || h_\text{oe}^{-1} \simeq R_C$\footnote{Sempre dal datasheet del transistor, si ha infatti $h_\text{oe} = 5\div35$ \SI{}{\micro \ohm^{-1}}.}, mentre $R_L$ sarà la resistenza di carico introdotta nel seguito. Se invece si fosse voluto realizzare un amplificatore con banda passante più ampia, si sarebbero senza dubbio inseriti condensatori di capacità più elevata.
 
 
 %==================================================
@@ -240,51 +240,6 @@ f_H &= \SI{1.05 \pm 0.05}{MHz};
 \]
 si confronta la prima con le frequenze di taglio delle~(\ref{eq:freqTaglio}), ovvero $f' = \SI{1199 \pm 21}{Hz}$, $f'' = \SI{1.02 \pm 0.02}{Hz}$ e con $f_E = 1/(2\pi C_E R_E) = \SI{1.49 \pm 0.01}{Hz}$ e si evince che nella zona crescente si ha l'effetto del solo filtro passa-alto dovuto a $C_1$, dal momento che le frequenze di taglio degli altri due filtri sono di molto inferiori; questo è visibile anche dalla pendenza della retta, pari a \SI{20}{\dB} per decade. Per la frequenza di taglio superiore, invece, poiché essa è dovuta alle capacità parassite del transistor ignote, non si è in grado di fornire un valore teorico di confronto. 
 
-\end{multicols}
-\begin{table*}
-\captionof{table}{Studio in frequenza dell'amplificatore}
-\label{tab:frequenza}
-\begin{center}
-\begin{tabular}{c|c|c|c}
-$f$ [\SI{}{Hz}] & $v_i$ ($\pm 3\%$) [\SI{}{mV}] & $v_o$ [\SI{}{mV}] ($\pm 3\%$) & $\abs{A_v}$ \\
-\hline
-   9.88e+01 &         39.2 &          114 &  2.91 \\
-   1.16e+02 &         39.2 &          131 &  3.34 \\
-   1.46e+02 &         39.2 &          164 &  4.18 \\
-   2.18e+02 &         36.6 &          226 &  6.17 \\
-   2.55e+02 &         39.4 &          284 &  7.21 \\
-   3.50e+02 &         36.8 &          354 &  9.62 \\
-   5.58e+02 &         39.2 &          580 & 14.80 \\
-   7.26e+02 &         36.8 &          672 & 18.26 \\
-   1.01e+03 &         39.2 &          920 & 23.47 \\
-   1.50e+03 &         36.8 &         1110 & 30.16 \\
-   2.06e+03 &         39.0 &         1340 & 34.36 \\
-   3.98e+03 &         38.8 &         1580 & 40.72 \\
-   8.20e+03 &         38.8 &         1820 & 46.91 \\
-   1.15e+04 &         38.8 &         1840 & 47.42 \\
-   1.65e+04 &         38.8 &         1850 & 47.68 \\
-   2.17e+04 &         38.8 &         1880 & 48.45 \\
-   3.07e+04 &         38.8 &         1900 & 48.97 \\
-   5.27e+04 &         38.8 &         1900 & 48.97 \\
-   9.15e+04 &         38.8 &         1900 & 48.97 \\
-   1.43e+05 &         38.8 &         1880 & 48.45 \\
-   1.77e+05 &         38.8 &         1860 & 47.94 \\
-   2.08e+05 &         38.8 &         1840 & 47.42 \\
-   3.34e+05 &         38.8 &         1750 & 45.10 \\
-   7.10e+05 &         37.6 &         1440 & 38.30 \\
-   1.18e+06 &         36.6 &         1120 & 30.60 \\
-   1.50e+06 &         36.2 &          880 & 24.31 \\
-   2.20e+06 &         35.8 &          650 & 18.16 \\
-   3.10e+06 &         32.4 &          432 & 13.33 \\
-   4.70e+06 &         32.6 &          306 &  9.39 \\
-   7.80e+06 &         27.6 &          170 &  6.16 \\
-   1.07e+07 &         22.6 &          114 &  5.04 \\
-   1.49e+07 &         31.6 &          134 &  4.24 \\
-\hline
-\end{tabular}
-\end{center}
-\end{table*}
-\begin{multicols}{2}
 
 %==================================================
 %      		RESISTENZA IN USCITA
@@ -350,7 +305,50 @@ $r_x$ ($\pm 3\%$) [\SI{}{k\ohm}] & $v_{i}$ ($\pm 3\%$) [\SI{}{mV}] &  $v_{2}$ ($
 \hline
 \end{tabular}
 \end{table}
-\begin{multicols}{2}
 
-\end{multicols}
+\begin{table*}
+\captionof{table}{Studio in frequenza dell'amplificatore}
+\label{tab:frequenza}
+\begin{center}
+\begin{tabular}{c|c|c|c}
+$f$ [\SI{}{Hz}] & $v_i$ ($\pm 3\%$) [\SI{}{mV}] & $v_o$ [\SI{}{mV}] ($\pm 3\%$) & $\abs{A_v}$ \\
+\hline
+   9.88e+01 &         39.2 &          114 &  2.91 \\
+   1.16e+02 &         39.2 &          131 &  3.34 \\
+   1.46e+02 &         39.2 &          164 &  4.18 \\
+   2.18e+02 &         36.6 &          226 &  6.17 \\
+   2.55e+02 &         39.4 &          284 &  7.21 \\
+   3.50e+02 &         36.8 &          354 &  9.62 \\
+   5.58e+02 &         39.2 &          580 & 14.80 \\
+   7.26e+02 &         36.8 &          672 & 18.26 \\
+   1.01e+03 &         39.2 &          920 & 23.47 \\
+   1.50e+03 &         36.8 &         1110 & 30.16 \\
+   2.06e+03 &         39.0 &         1340 & 34.36 \\
+   3.98e+03 &         38.8 &         1580 & 40.72 \\
+   8.20e+03 &         38.8 &         1820 & 46.91 \\
+   1.15e+04 &         38.8 &         1840 & 47.42 \\
+   1.65e+04 &         38.8 &         1850 & 47.68 \\
+   2.17e+04 &         38.8 &         1880 & 48.45 \\
+   3.07e+04 &         38.8 &         1900 & 48.97 \\
+   5.27e+04 &         38.8 &         1900 & 48.97 \\
+   9.15e+04 &         38.8 &         1900 & 48.97 \\
+   1.43e+05 &         38.8 &         1880 & 48.45 \\
+   1.77e+05 &         38.8 &         1860 & 47.94 \\
+   2.08e+05 &         38.8 &         1840 & 47.42 \\
+   3.34e+05 &         38.8 &         1750 & 45.10 \\
+   7.10e+05 &         37.6 &         1440 & 38.30 \\
+   1.18e+06 &         36.6 &         1120 & 30.60 \\
+   1.50e+06 &         36.2 &          880 & 24.31 \\
+   2.20e+06 &         35.8 &          650 & 18.16 \\
+   3.10e+06 &         32.4 &          432 & 13.33 \\
+   4.70e+06 &         32.6 &          306 &  9.39 \\
+   7.80e+06 &         27.6 &          170 &  6.16 \\
+   1.07e+07 &         22.6 &          114 &  5.04 \\
+   1.49e+07 &         31.6 &          134 &  4.24 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table*}
+
+
 \end{document}
