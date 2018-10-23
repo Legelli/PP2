@@ -185,11 +185,17 @@ Variando $v_s$, si misura con l'oscilloscopio l'ampiezza picco-picco di $v_i$ e 
 \captionof{table}{Misure di ampiezza picco-picco di $v_i$ e $v_o$}
 \label{tab:dinamica}
 \begin{tabular}{c|c|c}
-$v_i$ [\SI{}{V}] & $v_o$ [\SI{}{V}] & $A_v$ \\
+$v_i$ [\SI{}{mV}] ($\pm 3\%$) & $v_o$ ($\pm 3\%$) [\SI{}{V}] & $A_v$ \\
 \hline
-%INSERIRE TABELLA
-
-
+		19.80 &        0.91 &   46.06 \\
+        26.40 &        1.21 &   45.83 \\
+        34.00 &        1.55 &   45.59 \\
+        39.20 &        1.90 &   48.47 \\
+        47.60 &        2.20 &   46.22 \\
+        56.00 &        2.56 &   45.71 \\
+        62.00 &        2.82 &   45.48 \\
+        72.00 &        3.24 &   45.00 \\
+        84.00 &        3.68 &   43.81 \\
 \hline
 \end{tabular}
 \end{center}
@@ -215,24 +221,13 @@ Si osserva che per ampiezze superiori a $v_i \simeq \SI{90}{mV}$, il segnale app
 \section{Studio in frequenza}
 Si procede allo studio in frequenza del circuito, variando anche $v_s$ per evitare nella misura i fenomeni di distorsione precedentemente descritti. Si riporta in tabella~\ref{tab:frequenza} i valori di frequenza, $v_i$, $v_o$ e del modulo dell'amplificazione $\abs{A_v} = \abs{v_o} / \abs{v_i}$, e in figura~\ref{fig:bode} il diagramma di Bode corrispondente. 
 
-\begin{center}
-\captionof{table}{Studio in frequenza dell'amplificatore}
-\label{tab:frequenza}
-\begin{tabular}{c|c|c|c}
-$f$ [\SI{}{Hz}] & $v_i$ [\SI{}{V}] & $v_o$ [\SI{}{V}] & $\abs{A_v}$ \\
-\hline
-
-\hline
-\end{tabular}
-\end{center}
-
-%\begin{figure}[H]
-%	\begin{center}
-%	\includegraphics[width=\linewidth]{}
-%	\caption{Diagramma di Bode dell'amplificazione in funzione della frequenza}
-%	\label{fig:bode}
-%	\end{center}
-%\end{figure}
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=\linewidth]{bode_rette.pdf}
+	\caption{Diagramma di Bode dell'amplificazione in funzione della frequenza}
+	\label{fig:bode}
+	\end{center}
+\end{figure}
 
 Si osserva che per frequenze superiori ai \SI{10}{MHz} l'andamento dell'amplificazione in funzione della frequenza segue una pendenza diversa da quella precedentemente assunta dall'inizio della zona decrescente. Si ritiene che questo sia dovuto all'intervento della capacità interna dell'oscilloscopio, che si aggiunge ai già presenti effetti capacitativi parassiti del transistor.
 
@@ -245,6 +240,51 @@ f_H &= \SI{1.05 \pm 0.05}{MHz};
 \]
 si confronta la prima con le frequenze di taglio delle~(\ref{eq:freqTaglio}), ovvero $f' = \SI{1199 \pm 21}{Hz}$, $f'' = \SI{1.02 \pm 0.02}{Hz}$ e con $f_E = 1/(2\pi C_E R_E) = \SI{1.49 \pm 0.01}{Hz}$ e si evince che nella zona crescente si ha l'effetto del solo filtro passa-alto dovuto a $C_1$, dal momento che le frequenze di taglio degli altri due filtri sono di molto inferiori; questo è visibile anche dalla pendenza della retta, pari a \SI{20}{\dB} per decade. Per la frequenza di taglio superiore, invece, poiché essa è dovuta alle capacità parassite del transistor ignote, non si è in grado di fornire un valore teorico di confronto. 
 
+\end{multicols}
+\begin{table*}
+\captionof{table}{Studio in frequenza dell'amplificatore}
+\label{tab:frequenza}
+\begin{center}
+\begin{tabular}{c|c|c|c}
+$f$ [\SI{}{Hz}] & $v_i$ ($\pm 3\%$) [\SI{}{mV}] & $v_o$ [\SI{}{mV}] ($\pm 3\%$) & $\abs{A_v}$ \\
+\hline
+   9.88e+01 &         39.2 &          114 &  2.91 \\
+   1.16e+02 &         39.2 &          131 &  3.34 \\
+   1.46e+02 &         39.2 &          164 &  4.18 \\
+   2.18e+02 &         36.6 &          226 &  6.17 \\
+   2.55e+02 &         39.4 &          284 &  7.21 \\
+   3.50e+02 &         36.8 &          354 &  9.62 \\
+   5.58e+02 &         39.2 &          580 & 14.80 \\
+   7.26e+02 &         36.8 &          672 & 18.26 \\
+   1.01e+03 &         39.2 &          920 & 23.47 \\
+   1.50e+03 &         36.8 &         1110 & 30.16 \\
+   2.06e+03 &         39.0 &         1340 & 34.36 \\
+   3.98e+03 &         38.8 &         1580 & 40.72 \\
+   8.20e+03 &         38.8 &         1820 & 46.91 \\
+   1.15e+04 &         38.8 &         1840 & 47.42 \\
+   1.65e+04 &         38.8 &         1850 & 47.68 \\
+   2.17e+04 &         38.8 &         1880 & 48.45 \\
+   3.07e+04 &         38.8 &         1900 & 48.97 \\
+   5.27e+04 &         38.8 &         1900 & 48.97 \\
+   9.15e+04 &         38.8 &         1900 & 48.97 \\
+   1.43e+05 &         38.8 &         1880 & 48.45 \\
+   1.77e+05 &         38.8 &         1860 & 47.94 \\
+   2.08e+05 &         38.8 &         1840 & 47.42 \\
+   3.34e+05 &         38.8 &         1750 & 45.10 \\
+   7.10e+05 &         37.6 &         1440 & 38.30 \\
+   1.18e+06 &         36.6 &         1120 & 30.60 \\
+   1.50e+06 &         36.2 &          880 & 24.31 \\
+   2.20e+06 &         35.8 &          650 & 18.16 \\
+   3.10e+06 &         32.4 &          432 & 13.33 \\
+   4.70e+06 &         32.6 &          306 &  9.39 \\
+   7.80e+06 &         27.6 &          170 &  6.16 \\
+   1.07e+07 &         22.6 &          114 &  5.04 \\
+   1.49e+07 &         31.6 &          134 &  4.24 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table*}
+\begin{multicols}{2}
 
 %==================================================
 %      		RESISTENZA IN USCITA
@@ -259,11 +299,13 @@ R_\text{out} = \frac{v_o - v_{R_L}}{v_{R_L}}R_L.
 \captionof{table}{Valori misurati per la resistenza di uscita}
 \label{tab:resistUscita}
 \begin{tabular}{c|c|c}
-$R_L$ [\SI{}{\ohm}] & $v_{R_L}$ [\SI{}{V}] & $R_\text{out}$ [\SI{}{\ohm}] \\
+$R_L$ ($\pm 0.5\%$) [\SI{}{k\ohm}] & $v_{R_L}$ ($\pm 3\%$) [\SI{}{mV}] & $R_\text{out}$ [\SI{}{k\ohm}] \\
 \hline
-%INSERIRE TABELLA
-
-
+          0.817 &          672.00 &          1.250 \\
+          1.770 &         1000.00 &          1.239 \\
+          1.510 &          936.00 &          1.233 \\
+          1.186 &          840.00 &          1.214 \\
+          1.000 &          768.00 &          1.214 \\
 \hline
 \end{tabular}
 \end{center}
@@ -286,22 +328,29 @@ Si lavora ancora in regime sinusoidale a frequenza \SI{10.7 \pm 0.3}{kHz}.
 
 Si riporta in tabella~\ref{tab:resistIngresso} i valori di $r_x$ e dei potenziali, nonché le stime di $R_\text{in}$.
 
-\begin{center}
-\captionof{table}{Valori misurati per la resistenza di ingresso}
-\label{tab:resistIngresso}
-\begin{tabular}{c|c|c|c}
-$r_x$ [\SI{}{\ohm}] & $v_{i}$ [\SI{}{V}] &  $v_{2}$ [\SI{}{V}]  & $R_\text{in}$ [\SI{}{\ohm}] \\
-\hline
-%INSERIRE TABELLA
-
-\hline
-\end{tabular}
-\end{center}
-
 La stima della resistenza, data dal valore medio, è
 \[
 R_\text{in} = \SI{3.25 \pm 0.12}{k\ohm};
 \]
 si confronta questo valore con quello ricavato dalla frequenza di taglio stimata, ossia $R_\text{in} = 1 /(2\pi f_L C_1) = \SI{2.59 \pm 0.08}{k\ohm}$, e si osserva che sono compatibili, tenendo conto che anche la stima stessa della frequenza di taglio è affetta da incertezza.
+
+\end{multicols}
+\begin{table}[H]
+\captionof{table}{Valori misurati per la resistenza di ingresso}
+\label{tab:resistIngresso}
+\centering
+\begin{tabular}{c|c|c|c}
+$r_x$ ($\pm 3\%$) [\SI{}{k\ohm}] & $v_{i}$ ($\pm 3\%$) [\SI{}{mV}] &  $v_{2}$ ($\pm 3\%$) [\SI{}{mV}]  & $R_\text{in}$ [\SI{}{k\ohm}] \\
+\hline
+       	  1.000 &            260 &            200 &             3.333 \\
+          0.816 &            258 &            208 &             3.396 \\
+          1.190 &            262 &            190 &             3.140 \\
+          1.510 &            262 &            176 &             3.090 \\
+          1.770 &            258 &            168 &             3.304 \\
+\hline
+\end{tabular}
+\end{table}
+\begin{multicols}{2}
+
 \end{multicols}
 \end{document}
