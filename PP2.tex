@@ -88,6 +88,7 @@ Si realizza il circuito seguente per l'amplificatore, utilizzando un transistor 
 \begin{circuitikz} [scale=.9]
 	\draw (0,0) node[ground]{}
 	(0,0) to[sV, l=$v_{\text{s}}$] (0,2) to[R=$R_s$] (1.5,2) to[C=$C_1$] (3.5,2)
+	(1.75,2) node[circ]{} node[above]{$v_i$}
 	(3.5,-0.5) to[R=$R_2$] (3.5,2)
 	(3.5,2) to[R=$R_1$] (3.5,4.5)
 	(5,2) node[npn] (npn) {}
@@ -104,20 +105,36 @@ Si realizza il circuito seguente per l'amplificatore, utilizzando un transistor 
 	;\end{circuitikz}
 \end{flushleft}
 
+Si vuole ottenere un'amplificazione di $A_v \simeq -50$, dunque si scelgono resistenze di valore prossimo a quello indicato nel progetto della guida all'esperienza. Poiché i valori disponibili saranno diversi, tuttavia, si procederà a verificare la correttezza dell'amplificazione ottenuta, calcolando direttamente i valori previsti e confrontandoli con quelli misurati sul circuito.
 I valori degli elementi utilizzati sono, come da misura con il multimetro e con il ponte:
 \begin{equation*}
 \begin{aligned}
-R_1 &= \SI{111 \pm 111}{\ohm} \\
-R_2 &= \SI{111 \pm 111}{\ohm} \\
-R_C &= \SI{111 \pm 111}{\ohm} \\
-R_E &= \SI{111 \pm 111}{\ohm} \\
-V_\text{CC} &= \SI{111 \pm 111}{V} \\
-C_1 &= \SI{111 \pm 111}{F} \\
-C_2 &= \SI{111 \pm 111}{F} \\
-C_E &= \SI{111 \pm 111}{F}.
+R_1 &= \SI{32.8 \pm 0.2}{k\ohm} \\
+R_2 &= \SI{8.22 \pm 0.04}{k\ohm} \\
+R_C &= \SI{1.174 \pm 0.006}{k\ohm} \\
+R_E &= \SI{1.188 \pm 0.006}{k\ohm} \\
+V_\text{CC} &= \SI{9.967 \pm 0.005}{V} \\
+C_1 &= \SI{42.31 \pm 0.02}{nF} \\
+C_2 &= \SI{155.34 \pm 0.08}{nF} \\
+C_E &= \SI{89.62 \pm 0.05}{\micro F}.
 \end{aligned}
 \end{equation*}
-Si verifica con il multimetro che le tensioni tra i diversi nodi del circuito siano compatibili con quelle previste dalla teoria, al fine di verificare il corretto funzionamento del circuito stesso. Si riporta in tabella~\ref{tab:verifica} il confronto tra valore previsto e misurato.
+Si verifica con il multimetro che le tensioni tra i diversi nodi del circuito siano compatibili con quelle previste, dati gli elementi usati, al fine di verificare il corretto funzionamento del circuito stesso. 
+
+Si ha, nell'ipotesi che il circuito si trovi nella regione attiva\footnote{Dunque si ha $V_\text{BE} = 0.7$ e $I_B$ trascurabile; si verificherà la correttezza di queste ipotesi}:
+\begin{equation*}
+\begin{aligned}
+V_\text{BB} &= \frac{R_2}{R_1+R_2}V_\text{CC} \\
+V_\text{B} &\simeq V_\text{BB} \\
+I_C &= \frac{V_\text{BB} - V_\text{BE}}{R_E} \\
+I_E &\simeq I_C \\
+V_C &= V_\text{CC} - R_C I_C \\
+V_\text{CE} &= V_\text{CC} - (R_E + R_C)I_C \\
+V_\text{E} &= V_C - V_\text{CE}
+\end{aligned}
+\end{equation*}
+
+Per quanto riguarda le correnti di emettitore e di collettore, che nella regione attiva devono essere circa uguali, si misura con il multimetro la differenza di potenziale ai capi di $R_C$ e $R_E$ e si applica la legge di Ohm $I = V/R$. Si riporta in tabella~\ref{tab:verifica} il confronto tra valore previsto e misurato.
 
 \begin{center}
 \captionof{table}{Valori previsti e misurati per il circuito}
@@ -125,20 +142,166 @@ Si verifica con il multimetro che le tensioni tra i diversi nodi del circuito si
 \begin{tabular}{l|c|c}
  & Valore previsto & Valore misurato \\
 \hline
-$V_C$ & \SI{111}{V} & \SI{111 \pm 111}{V}\\
-$V_B$ & \SI{111}{V} & \SI{111 \pm 111}{V}\\
-$V_E$ & \SI{111}{V} & \SI{111 \pm 111}{V}\\
-$V_\text{CE}$ & \SI{111}{V} & \SI{111 \pm 111}{V}\\
-$V_\text{BE}$ & \SI{111}{V} & \SI{111 \pm 111}{V}\\
-$I_C$ & \SI{111}{mA} & \SI{111 \pm 111}{mA}\\
-$I_E$ & \SI{111}{mA} & \SI{111 \pm 111}{mA}\\
+$V_C$ & \SI{8.68}{V} & \SI{8.67 \pm 0.04}{V}\\
+$V_B$ & \SI{1.998}{V} & \SI{1.95 \pm 0.01}{V}\\
+$V_E$ & \SI{1.3}{V} & \SI{1.315 \pm 0.007}{V}\\
+$V_\text{CE}$ & \SI{7.39}{V} & \SI{7.36 \pm 0.04}{V}\\
+$V_\text{BE}$ & \SI{0.7}{V} & \SI{0.632 \pm 0.003}{V}\\
+$I_C$ & \SI{1.09}{mA} & \SI{1.10 \pm 0.01}{mA}\\
+$I_E$ & \SI{1.09}{mA} & \SI{1.11 \pm 0.01}{mA}\\
 \hline
 \end{tabular}
 \end{center}
 
-Si ha 
+Dalla tabella si evince che la differenza di potenziale tra base ed emettitore è compatibile con il valore $V_\text{BE} = \SI{0.7}{V}$, e la differenza di potenziale tra collettore ed emettitore è $V_\text{CE} > \SI{0.2}{V}$, dunque il transistor si trova nella regione attiva. L'amplificazione prevista risulta essere 
+\begin{equation}\label{eq:amp}
+A_v = -\frac{R_C I_C}{V_T} = -51.7 \pm 0.5,
+\end{equation}
+dove $V_T = \SI{25}{mV}$ alla temperatura del laboratorio, ed è compatibile con il valore richiesto dal progetto.
+
+Al fine di stabilizzare il punto di lavoro, si introducono i condensatori $C_1$, $C_2$ e $C_E$: i primi due impediscono le variazioni delle correnti statiche dovute alla connessione del generatore di segnali e della resistenza di carico, mentre $C_E$ permette di ottenere un'amplificazione data da~(\ref{eq:amp}) invece che da $A_v = -R_C / R_E$, per frequenze sufficientemente alte. La scelta compiuta per la $C_E$ verifica la condizione
+\[
+\frac{1}{\omega C_E} \ll R_E
+\]  
+anche per pulsazioni molto basse, dell'ordine di $10/(R_E C_E) \sim \SI{93.9}{s^{-1}}$, ossia fino a circa \SI{15}{Hz}.
+Utilizzando i condensatori $C_1$ e $C_2$, scelti con capacità molto grandi al fine di aumentare il più possibile la banda passante dell'amplificatore, si introdurranno comunque delle frequenze di taglio
+\begin{equation}\label{eq:freqTaglio}
+\begin{aligned}
+f' &= \frac{1}{2\pi C_1 R_\text{in}} \\
+f'' &= \frac{1}{2\pi C_2 (R_\text{out} + R_L)},
+\end{aligned}
+\end{equation}
+dove $R_\text{in} = R_B || h_\text{ie} \simeq R_B$\footnote{Dal datasheet del transistor si ha $h_\text{ie} = 2 \div 8$ \SI{}{k\ohm}.} e $R_\text{out} = R_C || h_\text{oe}^{-1} \simeq R_C$\footnote{Sempre dal datasheet del transistor, si ha infatti $h_\text{oe} = 5\div35$ \SI{}{\micro \ohm^{-1}}.}, mentre $R_L$ sarà la resistenza di carico introdotta nel seguito.
 
 
+%==================================================
+%      		DINAMICA DEL CIRCUITO
+%==================================================
+\section{Dinamica del circuito}
+Si connette al circuito il generatore di segnali e si imposta un segnale sinusoidale con frequenza fissa di \SI{53.6 \pm 1.6}{kHz} e ampiezza variabile $v_s$; si ricorda che la resistenza interna del generatore $R_s \simeq \SI{50}{\ohm}$ viene trascurata. Si connette inoltre al canale \texttt{CH1} dell'oscilloscopio il segnale d'ingresso e al canale \texttt{CH2} il segnale $v_o$.
+Variando $v_s$, si misura con l'oscilloscopio l'ampiezza picco-picco di $v_i$ e di $v_o$, e si stima l'amplificazione $A_v = -v_o / v_i$. Si riportano in tabella~\ref{tab:dinamica} i valori misurati.
 
+\begin{center}
+\captionof{table}{Misure di ampiezza picco-picco di $v_i$ e $v_o$}
+\label{tab:dinamica}
+\begin{tabular}{c|c|c}
+$v_i$ [\SI{}{V}] & $v_o$ [\SI{}{V}] & $A_v$ \\
+\hline
+%INSERIRE TABELLA
+
+
+\hline
+\end{tabular}
+\end{center}
+
+Si ha un'amplificazione media di
+\[
+A_v = 45.8 \pm 1.2.
+\]
+Si osserva che per ampiezze superiori a $v_i \simeq \SI{90}{mV}$, il segnale appare distorto: questo è dovuto alla limitata dinamica del transistor. Si riporta in figura~\ref{fig:distorsione} uno screenshot dell'oscilloscopio per evidenziare il fenomeno.
+
+\begin{figure}[H]
+	\begin{center}
+	\includegraphics[width=\linewidth]{taglio2.png}
+	\caption{Distorsione del segnale per elevati valori di $v_i$}
+	\label{fig:distorsione}
+	\end{center}
+\end{figure}
+
+
+%==================================================
+%      		STUDIO IN FREQUENZA
+%==================================================
+\section{Studio in frequenza}
+Si procede allo studio in frequenza del circuito, variando anche $v_s$ per evitare nella misura i fenomeni di distorsione precedentemente descritti. Si riporta in tabella~\ref{tab:frequenza} i valori di frequenza, $v_i$, $v_o$ e del modulo dell'amplificazione $\abs{A_v} = \abs{v_o} / \abs{v_i}$, e in figura~\ref{fig:bode} il diagramma di Bode corrispondente. 
+
+\begin{center}
+\captionof{table}{Studio in frequenza dell'amplificatore}
+\label{tab:frequenza}
+\begin{tabular}{c|c|c|c}
+$f$ [\SI{}{Hz}] & $v_i$ [\SI{}{V}] & $v_o$ [\SI{}{V}] & $\abs{A_v}$ \\
+\hline
+
+\hline
+\end{tabular}
+\end{center}
+
+%\begin{figure}[H]
+%	\begin{center}
+%	\includegraphics[width=\linewidth]{}
+%	\caption{Diagramma di Bode dell'amplificazione in funzione della frequenza}
+%	\label{fig:bode}
+%	\end{center}
+%\end{figure}
+
+Si osserva che per frequenze superiori ai \SI{10}{MHz} l'andamento dell'amplificazione in funzione della frequenza segue una pendenza diversa da quella precedentemente assunta dall'inizio della zona decrescente. Si ritiene che questo sia dovuto all'intervento della capacità interna dell'oscilloscopio, che si aggiunge ai già presenti effetti capacitativi parassiti del transistor.
+
+Si stimano quindi le frequenze di taglio inferiori e superiori, mediante un fit nelle tre zone dei punti che presentano un andamento lineare crescente, stazionario e decrescente, e trovando le intersezioni di quella crescente e decrescente con la retta stazionaria traslata verso il basso di \SI{3}{\dB}, ovvero del valore assunto in decibel dall'amplificazione alla frequenza di taglio. Si ha 
+\[
+\begin{aligned}
+f_L &= \SI{1.45 \pm 0.07}{kHz} \\
+f_H &= \SI{1.05 \pm 0.05}{MHz};
+\end{aligned}
+\]
+si confronta la prima con le frequenze di taglio delle~(\ref{eq:freqTaglio}), ovvero $f' = \SI{1199 \pm 21}{Hz}$, $f'' = \SI{1.02 \pm 0.02}{Hz}$ e con $f_E = 1/(2\pi C_E R_E) = \SI{1.49 \pm 0.01}{Hz}$ e si evince che nella zona crescente si ha l'effetto del solo filtro passa-alto dovuto a $C_1$, dal momento che le frequenze di taglio degli altri due filtri sono di molto inferiori; questo è visibile anche dalla pendenza della retta, pari a \SI{20}{\dB} per decade. Per la frequenza di taglio superiore, invece, poiché essa è dovuta alle capacità parassite del transistor ignote, non si è in grado di fornire un valore teorico di confronto. 
+
+
+%==================================================
+%      		RESISTENZA IN USCITA
+%==================================================
+\section{Resistenza di uscita}
+Si misura la resistenza di uscita dell'amplificatore, inserendo una resistenza di carico $R_L$ tra il potenziale $v_o$ e la terra. Si lavora in regime sinusoidale a frequenza \SI{10.7 \pm 0.3}{kHz} e si fissa innanzitutto il potenziale $v_o = \SI{1.70 \pm 0.05}{V}$ a vuoto, scegliendo $v_i = \SI{36.0 \pm 1.1}{mV}$. Si sceglieranno valori di $R_L \simeq R_C$ per ottimizzare la qualità della misura, e si varierà tale resistenza misurando la tensione ai suoi capi. Si riportano in tabella~\ref{tab:resistUscita} i valori di $R_L$ e di $v_{R_L}$. Si stima $R_\text{out}$ con
+\[
+R_\text{out} = \frac{v_o - v_{R_L}}{v_{R_L}}R_L.
+\]
+
+\begin{center}
+\captionof{table}{Valori misurati per la resistenza di uscita}
+\label{tab:resistUscita}
+\begin{tabular}{c|c|c}
+$R_L$ [\SI{}{\ohm}] & $v_{R_L}$ [\SI{}{V}] & $R_\text{out}$ [\SI{}{\ohm}] \\
+\hline
+%INSERIRE TABELLA
+
+
+\hline
+\end{tabular}
+\end{center}
+
+La stima della resistenza, data dal valore medio, è dunque
+\[
+R_\text{out} = \SI{1229 \pm 14}{\ohm},
+\]
+compatibile con il valore della resistenza $R_C$.
+
+%==================================================
+%      		RESISTENZA IN INGRESSO
+%==================================================
+\section{Resistenza di ingresso}
+Si valuta anche la resistenza in ingresso dell'amplificatore, mediante l'inserimento di una resistenza $r_x$ dell'ordine del \SI{}{k\ohm} tra il generatore di segnali e il condensatore $C_1$. Misurando i potenziali $v_i$ e $v_2$ rispettivamente prima e dopo la resistenza $r_x$ con l'oscilloscopio, si ricava il valore della resistenza di ingresso dall'equazione del partitore di tensione:
+\[
+R_\text{in} = \frac{v_2}{v_i - v_2}r_x.
+\]
+Si lavora ancora in regime sinusoidale a frequenza \SI{10.7 \pm 0.3}{kHz}.
+
+Si riporta in tabella~\ref{tab:resistIngresso} i valori di $r_x$ e dei potenziali, nonché le stime di $R_\text{in}$.
+
+\begin{center}
+\captionof{table}{Valori misurati per la resistenza di ingresso}
+\label{tab:resistIngresso}
+\begin{tabular}{c|c|c|c}
+$r_x$ [\SI{}{\ohm}] & $v_{i}$ [\SI{}{V}] &  $v_{2}$ [\SI{}{V}]  & $R_\text{in}$ [\SI{}{\ohm}] \\
+\hline
+%INSERIRE TABELLA
+
+\hline
+\end{tabular}
+\end{center}
+
+La stima della resistenza, data dal valore medio, è
+\[
+R_\text{in} = \SI{3.25 \pm 0.12}{k\ohm};
+\]
+si confronta questo valore con quello ricavato dalla frequenza di taglio stimata, ossia $R_\text{in} = 1 /(2\pi f_L C_1) = \SI{2.59 \pm 0.08}{k\ohm}$, e si osserva che sono compatibili, tenendo conto che anche la stima stessa della frequenza di taglio è affetta da incertezza.
 \end{multicols}
 \end{document}
